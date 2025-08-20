@@ -38,28 +38,30 @@ const createProduct = async (newProduct) => {
 //createProduct(newProduct);
 
 const fetchAllProducts = async () => {
-    try{
-     const products = await Product.find();
-     return products;
-    }catch(error){
-        console.log(error);
-    }
-}
+  try {
+    const products = await Product.find();
+    return products;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 app.get("/products", async (req, res) => {
-    try{
-        const allProducts = await fetchAllProducts();
-        if(allProducts.length){
-            res.status(200).json(allProducts);
-        }else{
-            res.status(400).json({message: "No Product Found!"});
-        }
-    }catch(error){
-        res.status(500).json({message: "Failed to fetch products", error});
+  try {
+    const allProducts = await fetchAllProducts();
+    console.log(allProducts);
+    if (allProducts.length) {
+      res.status(200).json(allProducts);
+    } else {
+      res.status(400).json({ message: "No Product Found!" });
     }
-})
+    return;
+  } catch (error) {
+    console.log("catch error", error);
+    res.status(500).json({ message: "Failed to fetch products", error });
+  }
+});
 
 app.listen(PORT, () => {
-    console.log("server is running on port:", PORT);
-})
-
+  console.log("server is running on port:", PORT);
+});
