@@ -58,7 +58,7 @@ app.get("/products", async (req, res) => {
     return;
   } catch (error) {
     console.log("catch error", error);
-    res.status(500).json({ message: "Failed to fetch products", error });
+    res.status(500).json({ message: "Failed to fetch products", error: error.message });
   }
 });
 
